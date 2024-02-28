@@ -12,3 +12,4 @@
 futures ; python_version == "2.7"
 pip-tools<6
 pip<22.1
+django<2
