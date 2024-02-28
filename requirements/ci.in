@@ -1,0 +1,4 @@
+# Requirements for running tests in Github Actions
+-c constraints.txt
+
+tox                       # Virtualenv management for tests
