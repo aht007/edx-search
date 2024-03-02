@@ -4,6 +4,42 @@
 #
 #    make upgrade
 #
+amqp==5.2.0
+    # via
+    #   -r requirements/base.txt
+    #   kombu
+backports.zoneinfo[tzdata]==0.2.1
+    # via
+    #   -r requirements/base.txt
+    #   celery
+    #   kombu
+billiard==4.2.0
+    # via
+    #   -r requirements/base.txt
+    #   celery
+celery==5.3.6
+    # via
+    #   -r requirements/base.txt
+    #   event-tracking
+click-didyoumean==0.3.0
+    # via
+    #   -r requirements/base.txt
+    #   celery
+click-plugins==1.1.1
+    # via
+    #   -r requirements/base.txt
+    #   celery
+click-repl==0.3.0
+    # via
+    #   -r requirements/base.txt
+    #   celery
+click==8.1.7
+    # via
+    #   -r requirements/base.txt
+    #   celery
+    #   click-didyoumean
+    #   click-plugins
+    #   click-repl
 coverage==7.4.3
     # via -r requirements/testing.in
 ddt==1.7.2
@@ -15,14 +51,26 @@ django==1.11.29
     #   event-tracking
 elasticsearch==1.9.0
     # via -r requirements/base.txt
-event-tracking==0.3.0
+event-tracking==1.0.0
     # via -r requirements/base.txt
+kombu==5.3.5
+    # via
+    #   -r requirements/base.txt
+    #   celery
 mock==5.1.0
     # via -r requirements/testing.in
+prompt-toolkit==3.0.43
+    # via
+    #   -r requirements/base.txt
+    #   click-repl
 pymongo==3.13.0
     # via
     #   -r requirements/base.txt
     #   event-tracking
+python-dateutil==2.9.0.post0
+    # via
+    #   -r requirements/base.txt
+    #   celery
 pytz==2024.1
     # via
     #   -r requirements/base.txt
@@ -32,7 +80,27 @@ six==1.16.0
     # via
     #   -r requirements/base.txt
     #   event-tracking
+    #   python-dateutil
+typing-extensions==4.10.0
+    # via
+    #   -r requirements/base.txt
+    #   kombu
+tzdata==2024.1
+    # via
+    #   -r requirements/base.txt
+    #   backports.zoneinfo
+    #   celery
 urllib3==1.26.18
     # via
     #   -r requirements/base.txt
     #   elasticsearch
+vine==5.1.0
+    # via
+    #   -r requirements/base.txt
+    #   amqp
+    #   celery
+    #   kombu
+wcwidth==0.2.13
+    # via
+    #   -r requirements/base.txt
+    #   prompt-toolkit
