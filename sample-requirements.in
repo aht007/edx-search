@@ -1,0 +1,5 @@
+django<3.2
+pip-tools
+pymongo
+mysqlclient
+redis
