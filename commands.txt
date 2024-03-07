@@ -5,8 +5,8 @@ For a single file demo of pip-compile:
 
 
 Steps to upgrade dependencies in edx-search:
-➜  python -m venv .venv   
-➜  source .venv/bin/activate 
+➜  python -m venv ~/.venv
+➜  source ~/.venv/bin/activate 
 ➜  pip install 'pip-tools==5.5.0'
 ➜  pip install 'pip==22.0.4'
 ➜  Delete the pip-tools file
