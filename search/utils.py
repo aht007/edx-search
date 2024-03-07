@@ -1,5 +1,4 @@
 """ Utility classes to support others """
-from __future__ import absolute_import
 import importlib
 import collections
 import six
@@ -22,10 +21,10 @@ def _load_class(class_path, default):
 
 def _is_iterable(item):
     """ Checks if an item is iterable (list, tuple, generator), but not string """
-    return isinstance(item, collections.Iterable) and not isinstance(item, six.string_types)
+    return isinstance(item, collections.abc.Iterable) and not isinstance(item, str)
 
 
-class ValueRange(object):
+class ValueRange:
 
     """ Object to represent a range of values """
 
