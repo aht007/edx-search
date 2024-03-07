@@ -1,0 +1,29 @@
+➜  First run pyupgrade
+
+For a single file demo of pip-compile:
+➜  pip-compile --rebuild --upgrade -o sample-requirements.txt sample-requirements.in
+
+
+Steps to upgrade dependencies in edx-search:
+➜  python -m venv .venv   
+➜  source .venv/bin/activate 
+➜  pip install 'pip-tools==5.5.0'
+➜  pip install 'pip==22.0.4'
+➜  Delete the pip-tools file
+➜  Run the inidividual command pip-compile --rebuild --upgrade -o requirements/pip-tools.txt requirements/pip-tools.in
+➜  Put these constraints:
+    pip-tools<6
+    pip<22.1
+    django<2
+    event-tracking==1.0.0
+
+➜  make upgrade
+
+For codemods:
+➜  pip install edx-repo-tools
+➜  modernize_tox
+➜  modernize_github_actions
+➜  pip install pyupgrade
+➜  find . -type f -name '*.py' | while read fname; do pyupgrade --exit-zero-even-if-changed --keep-percent-format --py3-plus --py36-plus --py38-plus "$fname"; done
+➜  
+
