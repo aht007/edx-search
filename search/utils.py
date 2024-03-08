@@ -1,6 +1,6 @@
 """ Utility classes to support others """
-import time
 from __future__ import absolute_import
+import time
 import importlib
 import collections
 import six
