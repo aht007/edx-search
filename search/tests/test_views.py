@@ -451,7 +451,6 @@ class BadIndexTest(TestCase, SearcherMixin):
         with self.assertRaises(Exception):
             searcher.index("courseware_content", [{"id": "FAKE_ID_3", "content": {"text": "Here comes the sun"}}])
 
-
 @override_settings(SEARCH_ENGINE="search.tests.utils.ForceRefreshElasticSearchEngine")
 @override_settings(ELASTIC_FIELD_MAPPINGS={"start_date": {"type": "date"}})
 @override_settings(COURSEWARE_INDEX_NAME=TEST_INDEX_NAME)
@@ -498,6 +497,22 @@ class ElasticSearchUrlTest(TestCase, SearcherMixin):
                 }
             ]
         )
+
+    @ddt.data(
+        # Quoted phrases
+        ('"in this context"', None, 3),
+        ('"in this context"', "ABC/DEF/GHI", 3),
+        ('"looks like"', None, 2),
+        ('"looks like"', "ABC/DEF/GHI", 2),
+        # Hyphenated phrases
+        ('k-means', None, 3),
+        ('k-means', "ABC/DEF/GHI", 3),
+    )
+    @ddt.unpack
+    def test_valid_search(self, query, course_id, result_count):
+        code, results = post_request({"search_string": query}, course_id)
+        self.assertTrue(199 < code < 300)
+        self.assertEqual(results["total"], result_count)
 
     def test_malformed_query_handling(self):
         # root
