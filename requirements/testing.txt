@@ -53,12 +53,20 @@ elasticsearch==1.9.0
     # via -r requirements/base.txt
 event-tracking==1.0.0
     # via -r requirements/base.txt
+exceptiongroup==1.2.0
+    # via pytest
+iniconfig==2.0.0
+    # via pytest
 kombu==5.3.5
     # via
     #   -r requirements/base.txt
     #   celery
 mock==5.1.0
     # via -r requirements/testing.in
+packaging==23.2
+    # via pytest
+pluggy==1.4.0
+    # via pytest
 prompt-toolkit==3.0.43
     # via
     #   -r requirements/base.txt
@@ -67,6 +75,8 @@ pymongo==3.13.0
     # via
     #   -r requirements/base.txt
     #   event-tracking
+pytest==8.0.2
+    # via -r requirements/testing.in
 python-dateutil==2.9.0.post0
     # via
     #   -r requirements/base.txt
@@ -81,6 +91,8 @@ six==1.16.0
     #   -r requirements/base.txt
     #   event-tracking
     #   python-dateutil
+tomli==2.0.1
+    # via pytest
 typing-extensions==4.10.0
     # via
     #   -r requirements/base.txt
