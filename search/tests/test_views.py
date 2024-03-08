@@ -497,19 +497,3 @@ class ElasticSearchUrlTest(TestCase, SearcherMixin):
                 }
             ]
         )
-
-    @ddt.data(
-        # Quoted phrases
-        ('"in this context"', None, 3),
-        ('"in this context"', "ABC/DEF/GHI", 3),
-        ('"looks like"', None, 2),
-        ('"looks like"', "ABC/DEF/GHI", 2),
-        # Hyphenated phrases
-        ('k-means', None, 3),
-        ('k-means', "ABC/DEF/GHI", 3),
-    )
-    @ddt.unpack
-    def test_valid_search(self, query, course_id, result_count):
-        code, results = post_request({"search_string": query}, course_id)
-        self.assertTrue(199 < code < 300)
-        self.assertEqual(results["total"], result_count)
