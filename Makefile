@@ -40,4 +40,4 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 
 test:
 	python -Wd -m coverage run manage.py test --settings=edxsearch.settings
-	pytest .
+	pytest -k search.tests.test_utils
