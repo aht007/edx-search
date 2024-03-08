@@ -8,11 +8,11 @@ import six
 
 def measure_time(func):
     def wrapper(*args, **kwargs):
-        start_time = time.perf_counter()
+        start_time = time.clock()
         result = func(*args, **kwargs)
-        end_time = time.perf_counter()
+        end_time = time.clock()
         print(f"Time taken to execute {func.__name__}: {end_time - start_time} seconds")
-        return result
+        return result, end_time - start_time
     return wrapper
 
 def _load_class(class_path, default):
