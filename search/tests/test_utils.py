@@ -1,5 +1,5 @@
 import time
-from .utils import measure_time
+from search.utils import measure_time
 
 def test_measure_time():
     @measure_time
