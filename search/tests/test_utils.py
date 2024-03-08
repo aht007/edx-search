@@ -1,4 +1,3 @@
-import pytest
 import time
 from .utils import measure_time
 
