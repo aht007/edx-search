@@ -10,6 +10,7 @@ Steps to upgrade dependencies in edx-search:
 ➜  source ~/.venv/bin/activate 
 ➜  pip install 'pip-tools==5.5.0'
 ➜  pip install 'pip==22.0.4'
+➜  For windows: python -m pip install 'pip==22.0.4'
 ➜  Delete the pip-tools file
 ➜  Put these constraints:
     pip-tools<6
@@ -25,5 +26,13 @@ For codemods:
 ➜  modernize_github_actions
 ➜  pip install pyupgrade
 ➜  find . -type f -name '*.py' | while read fname; do pyupgrade --exit-zero-even-if-changed --keep-percent-format --py3-plus --py36-plus --py38-plus "$fname"; done
-➜  
 
+On Windows:
+➜  Ideally use Git bash terminal
+➜  Get-ChildItem -Path . -Filter *.py -Recurse | ForEach-Object { pyupgrade --exit-zero-even-if-changed --keep-percent-format --py3-plus --py36-plus --py38-plus $_.FullName }
+➜  pip install virtualenv
+➜  virtualenv .venv
+➜  .venv\Scripts\activate
+➜  You might need: Set-ExecutionPolicy RemoteSigned
+➜  If you face any issue related to pip in windows, delete the file C/Users/Firstname
+➜  Make command installation: https://medium.com/@samsorrahman/how-to-run-a-makefile-in-windows-b4d115d7c516
