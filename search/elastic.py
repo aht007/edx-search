@@ -1,5 +1,4 @@
 """ Elastic Search implementation for courseware search index """
-from __future__ import absolute_import
 import copy
 import logging
 
@@ -272,7 +271,7 @@ class ElasticSearchEngine(SearchEngine):
         ElasticSearchEngine.set_mappings(self.index_name, doc_type, {})
 
     def __init__(self, index=None):
-        super(ElasticSearchEngine, self).__init__(index)
+        super().__init__(index)
         es_config = getattr(settings, "ELASTIC_SEARCH_CONFIG", [{}])
         self._es = getattr(settings, "ELASTIC_SEARCH_IMPL", Elasticsearch)(es_config)
         if not self._es.indices.exists(index=self.index_name):
@@ -538,10 +537,7 @@ class ElasticSearchEngine(SearchEngine):
 
         # We have a query string, search all fields for matching text within the "content" node
         if query_string:
-            if six.PY2:
-                query_string = query_string.encode('utf-8').translate(None, RESERVED_CHARACTERS)
-            else:
-                query_string = query_string.translate(query_string.maketrans('', '', RESERVED_CHARACTERS))
+            query_string = query_string.translate(query_string.maketrans('', '', RESERVED_CHARACTERS))
             elastic_queries.append({
                 "query_string": {
                     "fields": ["content.*"],
@@ -606,7 +602,7 @@ class ElasticSearchEngine(SearchEngine):
                 **kwargs
             )
         except exceptions.ElasticsearchException as ex:
-            message = six.text_type(ex)
+            message = str(ex)
             if 'QueryParsingException' in message:
                 log.exception("Malformed search query: %s", message)  # lint-amnesty, pylint: disable=unicode-format-string
                 raise QueryParseError('Malformed search query.')

@@ -1,10 +1,8 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # Some of the subclasses that get used as settings-overrides will yield this pylint
 # error, but they do get used when included as part of the override_settings
 # pylint: disable=too-few-public-methods
 """ Tests for search functionality """
-from __future__ import absolute_import
 import json
 import os
 from datetime import datetime
@@ -13,7 +11,7 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from elasticsearch import exceptions
 from elasticsearch.helpers import BulkIndexError
-from mock import patch
+from unittest.mock import patch
 
 from search.api import perform_search, NoSearchEngineError
 from search.elastic import RESERVED_CHARACTERS
@@ -85,14 +83,14 @@ class FileBackedMockSearchTests(MockSearchTests):
     """ Override that runs the same tests with file-backed MockSearchEngine """
 
     def setUp(self):
-        super(FileBackedMockSearchTests, self).setUp()
+        super().setUp()
         MockSearchEngine.create_test_file()
         self._searcher = None
 
     def tearDown(self):
         MockSearchEngine.destroy_test_file()
         self._searcher = None
-        super(FileBackedMockSearchTests, self).tearDown()
+        super().tearDown()
 
     def test_file_value_formats(self):
         """ test the format of values that write/read from the file """
@@ -148,7 +146,7 @@ class FileBackedMockSearchTests(MockSearchTests):
 
         # copy content, and then erase file so that backed file is not present and work is disabled
         initial_file_content = None
-        with open("testfile.pkl", "r") as dict_file:
+        with open("testfile.pkl") as dict_file:
             initial_file_content = json.load(dict_file)
         os.remove("testfile.pkl")
 

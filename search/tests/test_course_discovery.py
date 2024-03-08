@@ -1,11 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # Some of the subclasses that get used as settings-overrides will yield this pylint
 # error, but they do get used when included as part of the override_settings
 # pylint: disable=too-few-public-methods
 # pylint: disable=too-many-ancestors
 """ Tests for search functionalty """
-from __future__ import absolute_import
 import copy
 from datetime import datetime
 import ddt
@@ -21,7 +19,7 @@ from search.tests.utils import SearcherMixin, TEST_INDEX_NAME
 from .mock_search_engine import MockSearchEngine
 
 
-class DemoCourse(object):
+class DemoCourse:
     """ Class for dispensing demo courses """
     DEMO_COURSE_ID = "edX/DemoX/Demo_Course"
     DEMO_COURSE = {
@@ -95,7 +93,7 @@ class TestMockCourseDiscoverySearch(TestCase, SearcherMixin):  # pylint: disable
         return isinstance(self.searcher, ElasticSearchEngine)
 
     def setUp(self):
-        super(TestMockCourseDiscoverySearch, self).setUp()
+        super().setUp()
         # ignore unexpected-keyword-arg; ES python client documents that it can be used
         # pylint: disable=unexpected-keyword-arg
         if self._is_elastic:
@@ -124,7 +122,7 @@ class TestMockCourseDiscoverySearch(TestCase, SearcherMixin):  # pylint: disable
             MockSearchEngine.destroy()
 
         self._searcher = None
-        super(TestMockCourseDiscoverySearch, self).tearDown()
+        super().tearDown()
 
     def test_course_list(self):
         """ No arguments to course_discovery_search should show all available courses"""
@@ -309,7 +307,7 @@ class TestElasticCourseDiscoverySearch(TestMockCourseDiscoverySearch):
     """ version of tests that use Elastic Backed index instead of mock """
 
     def setUp(self):
-        super(TestElasticCourseDiscoverySearch, self).setUp()
+        super().setUp()
         self.searcher.index("doc_type_that_is_meaninless_to_bootstrap_index", [{"test_doc_type": "bootstrap"}])
 
     def test_course_matching_empty_index(self):

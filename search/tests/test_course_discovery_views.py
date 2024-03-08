@@ -1,5 +1,4 @@
 """ High-level view tests"""
-from __future__ import absolute_import
 from django.test.utils import override_settings
 
 from search.tests.tests import TEST_INDEX_NAME
@@ -24,7 +23,7 @@ class DiscoveryUrlTest(MockSearchUrlTest):
     """
 
     def setUp(self):
-        super(DiscoveryUrlTest, self).setUp()
+        super().setUp()
         DemoCourse.reset_count()
         DemoCourse.get_and_index(
             self.searcher, {"org": "OrgA", "content": {"short_description": "Find this one with the right parameter"}}
