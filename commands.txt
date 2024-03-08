@@ -1,3 +1,4 @@
+➜  Use python 3.8
 ➜  First run pyupgrade
 
 For a single file demo of pip-compile:
@@ -10,13 +11,12 @@ Steps to upgrade dependencies in edx-search:
 ➜  pip install 'pip-tools==5.5.0'
 ➜  pip install 'pip==22.0.4'
 ➜  Delete the pip-tools file
-➜  Run the inidividual command pip-compile --rebuild --upgrade -o requirements/pip-tools.txt requirements/pip-tools.in
 ➜  Put these constraints:
     pip-tools<6
     pip<22.1
     django<2
     event-tracking==1.0.0
-
+➜  Run the inidividual command pip-compile --rebuild --upgrade -o requirements/pip-tools.txt requirements/pip-tools.in
 ➜  make upgrade
 
 For codemods:
