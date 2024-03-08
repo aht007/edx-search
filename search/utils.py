@@ -1,9 +1,19 @@
 """ Utility classes to support others """
+import time
 from __future__ import absolute_import
 import importlib
 import collections
 import six
 
+
+def measure_time(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        print(f"Time taken to execute {func.__name__}: {end_time - start_time} seconds")
+        return result
+    return wrapper
 
 def _load_class(class_path, default):
     """ Loads the class from the class_path string """
