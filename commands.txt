@@ -2,6 +2,7 @@ Path for WSL:
 Open Ubuntu terminal
 cd /mnt/c/Users/stutest/Deskop/
 Use python3 instead of python in WSL
+Need to install python3.8-venv using apt install
 
 ➜  Use python 3.8
 ➜  First run pyupgrade
@@ -31,6 +32,8 @@ For codemods:
 ➜  modernize_github_actions
 ➜  pip install pyupgrade
 ➜  find . -type f -name '*.py' | while read fname; do pyupgrade --exit-zero-even-if-changed --keep-percent-format --py3-plus --py36-plus --py38-plus "$fname"; done
+➜  For WSL: find . -type f -name '*.py' | while read fname; do python3 -m pyupgrade --exit-zero-even-if-changed --keep-percent-format --py3-plus --py36-plus --py38-plus "$fname"; done
+
 
 On Windows:
 ➜  Ideally use Git bash terminal
