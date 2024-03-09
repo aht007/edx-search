@@ -1,3 +1,6 @@
+Path for WSL:
+cd /mnt/c/Users/stutest/Deskop/
+
 ➜  Use python 3.8
 ➜  First run pyupgrade
 
