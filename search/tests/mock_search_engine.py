@@ -1,5 +1,4 @@
 """ Implementation of search interface to be used for tests where ElasticSearch is unavailable """
-from __future__ import absolute_import
 import copy
 from datetime import datetime
 import json
@@ -39,7 +38,7 @@ def _find_field(doc, field_name):
     if not isinstance(doc, dict):
         raise ValueError('Parameter `doc` should be a python dict object')
 
-    if not isinstance(field_name, six.string_types):
+    if not isinstance(field_name, str):
         raise ValueError('Parameter `field_name` should be a string')
 
     immediate_field, remaining_path = field_name.split('.', 1) if '.' in field_name else (field_name, None)
@@ -69,7 +68,7 @@ def _filter_intersection(documents_to_search, dictionary_object, include_blanks=
 
         # if we have a string that we are trying to process as a date object
         if isinstance(field_value, (DateRange, datetime)):
-            if isinstance(compare_value, six.string_types):
+            if isinstance(compare_value, str):
                 compare_value = json_date_to_datetime(compare_value)
 
             field_has_tz_info = False
@@ -92,13 +91,13 @@ def _filter_intersection(documents_to_search, dictionary_object, include_blanks=
                 and (field_value.upper is None or compare_value <= field_value.upper)
             )
         elif _is_iterable(compare_value) and not _is_iterable(field_value):
-            return any((item == field_value for item in compare_value))
+            return any(item == field_value for item in compare_value)
 
         elif _is_iterable(field_value) and not _is_iterable(compare_value):
-            return any((item == compare_value for item in field_value))
+            return any(item == compare_value for item in field_value)
 
         elif _is_iterable(compare_value) and _is_iterable(field_value):
-            return any((six.text_type(item) in field_value for item in compare_value))
+            return any(str(item) in field_value for item in compare_value)
 
         return compare_value == field_value
 
@@ -113,10 +112,7 @@ def _process_query_string(documents_to_search, query_string):
     """ keep the documents that contain at least one of the search strings provided """
     def _encode_string(string):
         """Encode a Unicode string in the same way as the Elasticsearch search engine."""
-        if six.PY2:
-            string = string.encode('utf-8').translate(None, RESERVED_CHARACTERS)
-        else:
-            string = string.translate(string.maketrans('', '', RESERVED_CHARACTERS))
+        string = string.translate(string.maketrans('', '', RESERVED_CHARACTERS))
         return string
 
     def has_string(dictionary_object, search_string):
@@ -265,7 +261,7 @@ class MockSearchEngine(SearchEngine):
         """ load the index dict from the contents of the backing file """
         file_name = cls._backing_file()
         if file_name and os.path.exists(file_name):
-            with open(file_name, "r") as dict_file:
+            with open(file_name) as dict_file:
                 cls._mock_elastic = json.load(dict_file)
 
     @staticmethod
@@ -323,7 +319,7 @@ class MockSearchEngine(SearchEngine):
         cls._write_to_file()
 
     def __init__(self, index=None):
-        super(MockSearchEngine, self).__init__(index)
+        super().__init__(index)
         MockSearchEngine.load_index(self.index_name)
 
     def index(self, doc_type, sources):  # pylint: disable=arguments-differ

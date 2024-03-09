@@ -1,11 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # Some of the subclasses that get used as settings-overrides will yield this pylint
 # error, but they do get used when included as part of the override_settings
 # pylint: disable=too-few-public-methods
 # pylint: disable=too-many-ancestors
 """ Tests for search functionalty """
-from __future__ import absolute_import
 from datetime import datetime
 
 from django.core.cache import cache
@@ -34,7 +32,7 @@ class MockSearchTests(TestCase, SearcherMixin):
         return isinstance(self.searcher, ElasticSearchEngine)
 
     def setUp(self):
-        super(MockSearchTests, self).setUp()
+        super().setUp()
         # ignore unexpected-keyword-arg; ES python client documents that it can be used
         # pylint: disable=unexpected-keyword-arg
         if self._is_elastic:
@@ -61,7 +59,7 @@ class MockSearchTests(TestCase, SearcherMixin):
             MockSearchEngine.destroy()
 
         self._searcher = None
-        super(MockSearchTests, self).tearDown()
+        super().tearDown()
 
     def test_factory_creator(self):
         """ Make sure that search object implements SearchEngine interface """
@@ -322,7 +320,7 @@ class MockSearchTests(TestCase, SearcherMixin):
 
     def test_extended_characters(self):
         """ Make sure that extended character searches work """
-        test_string = u"قضايـا هامـة"
+        test_string = "قضايـا هامـة"
         self.searcher.index("test_doc", [{"content": {"name": test_string}}])
 
         # search string

@@ -1,5 +1,4 @@
 """ Test utilities """
-from __future__ import absolute_import
 import json
 from django.test import Client
 from elasticsearch import Elasticsearch, exceptions
@@ -13,7 +12,7 @@ TEST_INDEX_NAME = "test_index"
 
 def post_request(body, course_id=None):
     """ Helper method to post the request and process the response """
-    address = '/' if course_id is None else '/{}'.format(course_id)
+    address = '/' if course_id is None else f'/{course_id}'
     response = Client().post(address, body)
 
     return getattr(response, "status_code", 500), json.loads(getattr(response, "content", None).decode('utf-8'))
@@ -28,7 +27,7 @@ def post_discovery_request(body):
 
 
 # pylint: disable=too-few-public-methods
-class SearcherMixin(object):
+class SearcherMixin:
     """ Mixin to provide searcher for the tests """
     _searcher = None
 
@@ -52,13 +51,13 @@ class ForceRefreshElasticSearchEngine(ElasticSearchEngine):
         kwargs.update({
             "refresh": True
         })
-        super(ForceRefreshElasticSearchEngine, self).index(doc_type, sources, **kwargs)
+        super().index(doc_type, sources, **kwargs)
 
     def remove(self, doc_type, doc_ids, **kwargs):
         kwargs.update({
             "refresh": True
         })
-        super(ForceRefreshElasticSearchEngine, self).remove(doc_type, doc_ids, **kwargs)
+        super().remove(doc_type, doc_ids, **kwargs)
 
 
 class ErroringSearchEngine(MockSearchEngine):

@@ -1,5 +1,4 @@
 """ overridable filter object to inject fields to auto-filter upon within searches """
-from __future__ import absolute_import
 from datetime import datetime
 
 from django.conf import settings
@@ -7,7 +6,7 @@ from django.conf import settings
 from .utils import _load_class, DateRange
 
 
-class SearchFilterGenerator(object):
+class SearchFilterGenerator:
 
     """
     Class to provide a set of filters for the search.
