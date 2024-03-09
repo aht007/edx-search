@@ -1,5 +1,7 @@
 Path for WSL:
+Open Ubuntu terminal
 cd /mnt/c/Users/stutest/Deskop/
+Use python3 instead of python in WSL
 
 ➜  Use python 3.8
 ➜  First run pyupgrade
