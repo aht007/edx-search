@@ -3,6 +3,7 @@ Open Ubuntu terminal
 cd /mnt/c/Users/stutest/Deskop/
 Use python3 instead of python in WSL
 Need to install python3.8-venv using apt install
+pip3 install edx-repo-tools pyupgrade pip-tools==5.5.0
 
 ➜  Use python 3.8
 ➜  First run pyupgrade
